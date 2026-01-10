@@ -1,20 +1,492 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/shield.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Tyler Hudson Portfolio - Tech Engineer, Gaming Creator, Christian Ministry" />
-    <meta name="keywords" content="Tyler Hudson, Persevus, Serviam, portfolio, tech, gaming, ministry" />
-    <meta name="author" content="Tyler Hudson" />
-    <title>Tyler Hudson Portfolio</title>
-    <!-- Preload fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tyler Hudson | Cloud & AI Engineer</title>
+  <meta name="description" content="Cloud Engineer | DevOps | AI enthusiast — Building infrastructure as code and intelligent tools"/>
+  
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:title" content="Tyler Hudson - Cloud & AI Portfolio"/>
+  <meta property="og:description" content="Infrastructure as Code, Azure, Terraform, Private RAG, AI Chatbots"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tkhudson.github.io/"/> <!-- ← change to your actual URL -->
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --bg: #0a0a0a;
+      --text: #e0e0e0;
+      --accent: #00ff00;
+      --secondary: #008f11;
+      --card: #111111;
+      --border: #222222;
+      --shadow: #00ff0020;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    
+    @keyframes subtleGlow {
+      0%, 100% { text-shadow: 0 0 8px var(--accent); }
+      50% { text-shadow: 0 0 12px var(--accent), 0 0 16px var(--accent); }
+    }
+    
+    @keyframes fadeSlide {
+      from { 
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      padding: 3rem;
+      background: rgba(17, 17, 17, 0.95);
+      border-radius: 8px;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    h1:hover {
+      animation: subtleGlow 1.5s ease-in-out;
+    }
+    
+    .tagline {
+      font-size: 1.4rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    
+    section {
+      margin-bottom: 4rem;
+    }
+    
+    h2 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    h2:hover {
+      text-shadow: 0 0 10px var(--accent);
+    }
+    
+    .project {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        0 0 0 1px var(--accent);
+      border-color: var(--accent);
+    }
+    
+    .project:hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: scan 1.5s linear;
+    }
+    
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .project h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .project p {
+      color: var(--text);
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+    
+    .project p strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .badge {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: 'Fira Code', monospace;
+      transition: all 0.3s ease;
+    }
+    
+    .badge:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--shadow);
+      transform: translateY(-2px);
+    }
+    
+    .repo-link {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-family: 'Fira Code', monospace;
+      border: 1px solid transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    
+    .repo-link::before {
+      content: '> ';
+      color: var(--secondary);
+    }
+    
+    .repo-link:hover {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+    
+    footer {
+      background: rgba(17, 17, 17, 0.9);
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-text {
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.7rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .footer-links a:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .footer-bottom {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    
+    @media (max-width: 600px) {
+      h1 { 
+        font-size: 2.8rem; 
+        letter-spacing: 1px;
+      }
+      h2 { font-size: 1.8rem; }
+      .project { padding: 1.5rem; }
+      .container { 
+        padding: 2rem; 
+        margin: 1rem;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+      .footer-links a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header>
+      <h1>Tyler Hudson</h1>
+      <p class="tagline">Cloud Engineer • DevOps • AI Enthusiast</p>
+      <p>Focused on infrastructure as code, Azure, automation, and intelligent tools</p>
+    </header>
+
+    <section>
+      <h2>Certifications</h2>
+      
+      <div class="project">
+        <h3>CompTIA Security+</h3>
+        <p>2025 | Cert Number: COMP001022568724</p>
+        <div class="skills">
+          <span class="badge">Security</span>
+          <span class="badge">Risk Assessment</span>
+          <span class="badge">Compliance</span>
+        </div>
+      </div>
+      
+      <div class="project">
+        <h3>AZ-900: Microsoft Azure Fundamentals</h3>
+        <p>2024 | Cert Number: 6CADL4-5730A2</p>
+        <div class="skills">
+          <span class="badge">Azure</span>
+          <span class="badge">Cloud Computing</span>
+          <span class="badge">Microsoft</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Professional Experience</h2>
+      
+      <div class="project">
+        <h3>Solutions Engineer | Hudson IT Consulting, LLC</h3>
+        <p><strong>San Antonio, TX | 2019 – Present</strong></p>
+        <p>• Designed secure IT solutions for 8+ clients using Ubiquiti UDM, Switches, and APs, focusing on network architecture and cloud integration with Azure and AWS</p>
+        <p>• Built frontend interfaces with Vue.js, JavaScript, HTML5, and CSS, connecting to APIs for seamless user experiences</p>
+        <p>• Managed projects with JIRA and Confluence in Agile workflows, utilizing Git for version control</p>
+        <p>• Performed risk assessments and drafted security policies, reducing vulnerabilities by NIST and HIPAA standards</p>
+        <div class="skills">
+          <span class="badge">Azure</span>
+          <span class="badge">AWS</span>
+          <span class="badge">Ubiquiti</span>
+          <span class="badge">Vue.js</span>
+          <span class="badge">JIRA</span>
+        </div>
+      </div>
+      
+      <div class="project">
+        <h3>Network Administrator | Global Evangelism, Inc.</h3>
+        <p><strong>San Antonio, TX | August 2023 - Present</strong></p>
+        <p>• Manages a Windows-based network for 3,000+ users, integrating Microsoft 365 cloud services with Cisco ISE and Cisco Umbrella</p>
+        <p>• Implements automated patching and backup strategies using Cisco Firewalls and Cisco IOS, reducing downtime by 25%</p>
+        <p>• Monitored and investigated security threats using Cisco XDR, coordinating incident responses</p>
+        <div class="skills">
+          <span class="badge">Microsoft 365</span>
+          <span class="badge">Cisco</span>
+          <span class="badge">Active Directory</span>
+          <span class="badge">NIST SP 800-53</span>
+        </div>
+      </div>
+      
+      <div class="project">
+        <h3>Site Reliability Engineer | Microsoft</h3>
+        <p><strong>Redmond, WA | August 2022 – May 2023</strong></p>
+        <p>• Developed and maintained CI/CD pipelines using Azure DevOps, Jenkins, and Git</p>
+        <p>• Implemented Infrastructure as Code (IaC) using Terraform, reducing provisioning time by 50%</p>
+        <p>• Utilized Zenoss and Azure Monitor achieving 99.9% uptime by proactively identifying and mitigating risks</p>
+        <p>• Supported containerized applications using Docker, optimizing deployment processes within Azure cloud infrastructure</p>
+        <div class="skills">
+          <span class="badge">Azure DevOps</span>
+          <span class="badge">Terraform</span>
+          <span class="badge">Docker</span>
+          <span class="badge">Jenkins</span>
+          <span class="badge">FedRAMP</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Core Skills</h2>
+      
+      <div class="project">
+        <div class="skills">
+          <span class="badge">Azure</span>
+          <span class="badge">AWS</span>
+          <span class="badge">Terraform</span>
+          <span class="badge">Docker</span>
+          <span class="badge">Kubernetes</span>
+          <span class="badge">Python</span>
+          <span class="badge">PowerShell</span>
+          <span class="badge">Bash</span>
+          <span class="badge">CI/CD</span>
+          <span class="badge">Azure DevOps</span>
+          <span class="badge">Jenkins</span>
+          <span class="badge">Git</span>
+          <span class="badge">JIRA</span>
+          <span class="badge">Confluence</span>
+          <span class="badge">Microsoft 365</span>
+          <span class="badge">Active Directory</span>
+          <span class="badge">Cisco</span>
+          <span class="badge">Ubiquiti</span>
+          <span class="badge">Vue.js</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">HTML5</span>
+          <span class="badge">CSS</span>
+          <span class="badge">Security+</span>
+          <span class="badge">NIST</span>
+          <span class="badge">HIPAA</span>
+          <span class="badge">FedRAMP</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Featured Projects</h2>
+      <p style="color: var(--secondary); margin-bottom: 2rem; font-style: italic;">Here are some of my favorite projects:</p>
+      
+      <h3 style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem; margin-top: 2rem;">Network / Azure / Infrastructure as Code</h3>
+      
+      <div class="project">
+        <h3>Custom Bash Scripts → Full Terraform Deployment in Azure</h3>
+        <p>Modernizing legacy bash automation into clean, scalable, production-ready Terraform IaC on Microsoft Azure</p>
+        
+        <div class="skills">
+          <span class="badge">Azure</span>
+          <span class="badge">Terraform</span>
+          <span class="badge">Bash</span>
+          <span class="badge">IaC</span>
+        </div>
+        
+        <a href="https://github.com/tkhudson/Bash-to-Terraform-Deployment" class="repo-link" target="_blank" rel="noopener noreferrer">→ View Repository</a>
+      </div>
+    </section>
+
+      <h3 style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem; margin-top: 2rem;">AI Integrated Projects</h3>
+      
+      <div class="project">
+        <h3>Private RAG Knowledge Base Chatbot</h3>
+        <p>Secure, fully private document Q&A assistant powered by Retrieval-Augmented Generation</p>
+        <div class="skills">
+          <span class="badge">Python</span>
+          <span class="badge">RAG</span>
+          <span class="badge">LLMs</span>
+          <span class="badge">Vector DB</span>
+        </div>
+        <a href="https://github.com/tkhudson/hudson-rag-bot" class="repo-link" target="_blank" rel="noopener noreferrer">→ View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>AI-Powered Customer Support Chatbot</h3>
+        <p>Intelligent, context-aware support agent with natural, human-like conversation flow</p>
+        <div class="skills">
+          <span class="badge">Python</span>
+          <span class="badge">Conversational AI</span>
+          <span class="badge">Prompt Engineering</span>
+        </div>
+        <a href="https://github.com/tkhudson/AI-Powered-Customer-Support-Chatbot" class="repo-link" target="_blank" rel="noopener noreferrer">→ View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>AI Note Companion for Obsidian</h3>
+        <p>Smart note enhancement, summarization, auto-linking & insights directly inside Obsidian</p>
+        <div class="skills">
+          <span class="badge">Python</span>
+          <span class="badge">Local LLMs</span>
+          <span class="badge">Obsidian API</span>
+          <span class="badge">Note Automation</span>
+        </div>
+        <a href="https://github.com/tkhudson/AI-Note-Companion-Obsidian" class="repo-link" target="_blank" rel="noopener noreferrer">→ View Repository</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-text">
+        <p>Let's build something great together!</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/tyler-k-hudson/" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+        <a href="https://github.com/tkhudson" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Tyler Hudson • Cloud Engineer & AI Enthusiast</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
 </html>
